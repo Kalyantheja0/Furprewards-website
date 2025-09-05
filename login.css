@@ -1,0 +1,26 @@
+/* login.css */
+
+.page-login {
+  background: #0d0f1a;
+  color: #fff;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.login-card {
+  max-width: 400px;
+  margin: 10vh auto;
+  padding: 2rem;
+  background: #1b1f2e;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.btn-discord {
+  background: #5865F2;
+  color: #fff;
+  font-weight: 600;
+}
+
+.btn-discord:hover {
+  background: #4752c4;
+}

@@ -1,0 +1,92 @@
+/* guess.css */
+
+body.page-guess {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+#three-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: -1;
+}
+
+.hero {
+  background: linear-gradient(145deg,#222a38,#0f1114);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 25px #003366;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: #1c1f26;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.stat {
+  flex: 1 1 130px;
+  background: #2c2f3a;
+  margin: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+.stat span {
+  display: block;
+  font-size: 14px;
+  color: #aaa;
+}
+.stat strong {
+  font-size: 20px;
+  color: #00e6ff;
+}
+
+.guess-section {
+  background: #1c1f26;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  display: none;
+}
+.guess-section input {
+  padding: 10px;
+  font-size: 16px;
+  width: 200px;
+  border: none;
+  border-radius: 6px;
+}
+.guess-section button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #50bfff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.guess-section button:hover {
+  background: #3399cc;
+}
+.guess-feedback {
+  font-weight: bold;
+  color: #00ffcc;
+}
+
+.leaderboard-section {
+  display: none;
+}
+.leaderboard-section table {
+  width: 100%;
+  color: #fff;
+}
+.leaderboard-section th,
+.leaderboard-section td {
+  padding: 8px;
+  border-bottom: 1px solid #444;
+  text-align: left;
+}
