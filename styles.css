@@ -50,7 +50,7 @@ body.page-index {
   .splash.full img {
     position:absolute;
     width:100%; height:100%;
-    object-fit:cover;
+    object-fit: contain; /* This was changed from 'cover' */
     z-index:1;
   }
   
@@ -126,6 +126,3 @@ body.page-index {
     display:block; font-size:.8rem;
     color:#aaa; font-weight:normal;
   }
-
-
-  
