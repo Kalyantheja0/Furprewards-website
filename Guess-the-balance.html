@@ -40,9 +40,10 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Bonus hunt</a>
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Stream</a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="Guess-the-balance.html-balance">Guess the balance</a></li>
+                <li><a class="dropdown-item" href="Guess-the-balance.html">Guess the balance</a></li>
+                <li><a class="dropdown-item" href="tournament.html">Tournament</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">
@@ -81,7 +82,7 @@
     <p>Follow the progress and take your best guess at the final balance.</p>
 
     <div class="admin-panel-link mt-4">
-      <a href="admin.html" id="adminLink" class="btn btn-outline-warning d-none">
+      <a href="admin.html" class="btn btn-outline-warning d-none admin-only-link">
         <i class="fas fa-user-shield me-2"></i> Go to Admin Panel
       </a>
     </div>
@@ -98,7 +99,7 @@
       <p>Think you know the final balance? Enter your guess below:</p>
       <input type="number" id="userGuess" class="form-control d-inline-block w-auto" placeholder="e.g. 3500" />
       <button id="submitBtn" class="btn btn-info ms-2">Submit Guess</button>
-      <a href="admin.html" id="adminLink" target="_blank" class="btn btn-outline-warning ms-2 d-none">
+      <a href="admin.html" target="_blank" class="btn btn-outline-warning ms-2 d-none admin-only-link">
         <i class="fas fa-user-shield me-2"></i> Admin Panel
       </a>
       <div id="feedback" class="guess-feedback mt-3"></div>

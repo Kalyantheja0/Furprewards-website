@@ -1,0 +1,147 @@
+/* tournament.css */
+.page-tournament {
+    padding-top: 60px;
+}
+
+.tournament-container {
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    padding: 20px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.bracket-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px; /* Added a gap to create space between rounds */
+}
+
+.round {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+}
+
+.round-header {
+    text-align: center;
+    font-weight: bold;
+    color: #aaa;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+}
+
+.match {
+    position: relative;
+    background-color: #2c2f3a;
+    border-radius: 8px;
+    border: 1px solid #444;
+}
+
+.reset-match-button {
+    display: none;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 20px;
+    text-align: center;
+    z-index: 10;
+}
+body.admin-mode-on .match.has-winner .reset-match-button {
+    display: block;
+}
+
+.player {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    min-width: 200px;
+    border-bottom: 1px solid #444;
+}
+.player:last-child {
+    border-bottom: none;
+}
+
+.player-name {
+    flex-grow: 1;
+}
+
+.win-button {
+    display: none;
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 3px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+}
+body.admin-mode-on .player:not(.loser) .win-button {
+    display: inline-block;
+}
+
+.player-name[contenteditable="true"] {
+    background-color: #3a3f51;
+    cursor: text;
+    outline: 2px solid #50bfff;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.player.winner .player-name {
+    font-weight: bold;
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+.player.loser {
+    opacity: 0.4;
+    filter: grayscale(80%);
+}
+.player.loser .win-button {
+    display: none;
+}
+
+.champion-box {
+    background-color: #1a1c22;
+    border: 2px solid #00ffcc;
+    box-shadow: 0 0 15px #00ffcc;
+}
+.champion-box .player {
+    border-bottom: none;
+    justify-content: center;
+}
+.champion-box .win-button {
+    display: none;
+}
+
+/* The .connector-line rule has been completely removed */
+
+#past-tournaments-section .list-group-item {
+    background-color: #2c2f3a;
+    border-color: #444;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#past-tournaments-section .list-group-item .champion-name {
+    font-weight: bold;
+    color: #00ffcc;
+}

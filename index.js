@@ -7,25 +7,40 @@ const supabase = createClient(
 );
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Splash "Enter" button
+  // --- SAFE INITIALIZATION ---
+  // These functions will now only run if the necessary elements exist on the page.
+
+  // Splash "Enter" button (only on index.html)
   const enterBtn = document.getElementById('enter-btn');
   if (enterBtn) {
     enterBtn.addEventListener('click', () => {
-      document.getElementById('splash-screen').classList.add('hide');
+      const splashScreen = document.getElementById('splash-screen');
+      if (splashScreen) {
+        splashScreen.classList.add('hide');
+      }
     });
   }
 
-  // Auth & Navbar
+  // Auth & Navbar (runs on all pages)
   initAuth();
 
-  // Kick popup
-  document.querySelector('.kick-popup .close-btn').addEventListener('click', () => {
-    document.getElementById('kickPopup').style.display = 'none';
-  });
-  checkFurpLive();
+  // Kick popup (only on index.html)
+  const kickPopup = document.getElementById("kickPopup");
+  if (kickPopup) {
+    const closeBtn = kickPopup.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        kickPopup.style.display = 'none';
+      });
+    }
+    checkFurpLive();
+  }
 
-  // Starfield
-  startStarfield();
+  // Starfield (runs on all pages)
+  const threeContainer = document.getElementById('three-container');
+  if (threeContainer) {
+    startStarfield(threeContainer);
+  }
 });
 
 async function initAuth() {
@@ -38,31 +53,33 @@ async function initAuth() {
 
   if (session) {
     // User is logged in
-    loginLink.style.display = 'none'; // Hide login button
-    logoutLink.style.display = 'block'; // Show logout button
+    if(loginLink) loginLink.style.display = 'none';
+    if(logoutLink) logoutLink.style.display = 'block';
 
     // Update user display name and avatar
     const user = session.user;
     const name = user.user_metadata?.custom_claims?.global_name || user.user_metadata?.full_name || 'User';
     const avatarUrl = user.user_metadata?.avatar_url;
     
-    loginName.innerText = name;
-    if (avatarUrl) {
+    if(loginName) loginName.innerText = name;
+    if (avatarUrl && userAvatar) {
       userAvatar.src = avatarUrl;
     }
 
     // Set up the logout functionality
-    logoutLink.addEventListener('click', async () => {
-      await supabase.auth.signOut();
-      window.location.href = '/login.html';
-    });
+    if(logoutLink) {
+        logoutLink.addEventListener('click', async () => {
+            await supabase.auth.signOut();
+            window.location.href = '/login.html';
+        });
+    }
     
   } else {
     // User is logged out
-    loginLink.style.display = 'block'; // Show login button
-    logoutLink.style.display = 'none'; // Hide logout button
-    loginName.innerText = 'Login';
-    userAvatar.src = 'images/login.png'; // Reset to default avatar
+    if(loginLink) loginLink.style.display = 'block';
+    if(logoutLink) logoutLink.style.display = 'none';
+    if(loginName) loginName.innerText = 'Login';
+    if(userAvatar) userAvatar.src = 'images/login.png';
   }
 }
 
@@ -72,22 +89,24 @@ async function checkFurpLive() {
     const data = await res.json();
     const popup = document.getElementById("kickPopup");
     const content = document.getElementById("kickContent");
-    content.innerHTML = data.livestream
-      ? '<iframe src="https://kick.com/embed/furp" allowfullscreen></iframe>'
-      : '<div class="offline-message">Furp is currently offline</div>';
-    popup.style.display = "block";
+    if(popup && content) {
+        content.innerHTML = data.livestream
+          ? '<iframe src="https://kick.com/embed/furp" allowfullscreen></iframe>'
+          : '<div class="offline-message">Furp is currently offline</div>';
+        popup.style.display = "block";
+    }
   } catch (err) {
-    console.error(err);
+    console.error("Error checking Kick status:", err);
   }
 }
 
-function startStarfield() {
+function startStarfield(container) {
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, innerWidth/innerHeight, 0.1, 1000);
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
   camera.position.z = 1;
   const renderer = new THREE.WebGLRenderer({ alpha: true });
-  renderer.setSize(innerWidth, innerHeight);
-  document.getElementById('three-container').appendChild(renderer.domElement);
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  container.appendChild(renderer.domElement);
 
   const geo = new THREE.BufferGeometry();
   const pos = new Float32Array(8000*3).map(() => (Math.random()-0.5)*2000);
@@ -103,8 +122,8 @@ function startStarfield() {
   })();
 
   window.addEventListener('resize', () => {
-    camera.aspect = innerWidth/innerHeight;
+    camera.aspect = window.innerWidth/window.innerHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(innerWidth, innerHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight);
   });
 }
